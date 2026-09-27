@@ -1,0 +1,59 @@
+spring:
+  profiles:
+    default: dev
+  application:
+    name: online-assessment-backend
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/online_assessment?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:mks@123}
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  jackson:
+    time-zone: UTC
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-to-a-long-random-secret-at-least-32-characters}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  cors:
+    allowed-origin: ${FRONTEND_URL:http://localhost:5173}
+  seed-sample-data: ${SEED_SAMPLE_DATA:false}
+  seed-admin: ${SEED_ADMIN:false}
+  admin:
+    email: ${ADMIN_EMAIL:admin@onlineassessment.local}
+    password: ${ADMIN_PASSWORD:}
+
+  judge0:
+    url: ${JUDGE0_URL:https://ce.judge0.com}
+    api-key: ${JUDGE0_API_KEY:}
+    poll-ms: ${JUDGE0_POLL_MS:500}
+    max-polls: ${JUDGE0_MAX_POLLS:30}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

@@ -1,0 +1,2 @@
+import {useEffect} from 'react'
+export default function Toast({message,type='info',onClose}){useEffect(()=>{if(message){const t=setTimeout(onClose,3500);return()=>clearTimeout(t)}},[message,onClose]);if(!message)return null;return <div className={`fixed right-5 top-5 z-[100] max-w-sm rounded-2xl border px-4 py-3 text-sm shadow-soft ${type==='error'?'border-red-200 bg-red-50 text-red-700':'border-slate-200 bg-white text-slate-700'}`}>{message}</div>}

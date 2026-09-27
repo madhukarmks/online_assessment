@@ -1,0 +1,1 @@
+package com.onlineassessment.repository; import com.onlineassessment.entity.*; import org.springframework.data.jpa.repository.*; import java.util.*; public interface AssessmentRepository extends JpaRepository<Assessment,Long>{List<Assessment> findAllByOrderByCreatedAtDesc(); List<Assessment> findByPublishedTrueOrderByStartAtAsc();}

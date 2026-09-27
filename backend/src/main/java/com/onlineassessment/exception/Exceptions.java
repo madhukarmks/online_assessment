@@ -1,0 +1,1 @@
+package com.onlineassessment.exception; public class Exceptions { public static class NotFound extends RuntimeException{public NotFound(String m){super(m);}} public static class BadRequest extends RuntimeException{public BadRequest(String m){super(m);}} public static class Forbidden extends RuntimeException{public Forbidden(String m){super(m);}} }

@@ -1,0 +1,7 @@
+package com.onlineassessment.service;
+import com.onlineassessment.dto.*; import com.onlineassessment.entity.*; import java.util.*; import org.springframework.stereotype.Service;
+@Service public class MappingService {
+ private List<Integer> langs(Question q){ if(q.getAllowedLanguageIds()==null||q.getAllowedLanguageIds().isBlank()) return List.of(); return Arrays.stream(q.getAllowedLanguageIds().split(",")).filter(x->!x.isBlank()).map(Integer::valueOf).toList(); }
+ public QuestionDtos.PublicQuestion pub(Question q){return new QuestionDtos.PublicQuestion(q.getId(),q.getQuestionText(),q.getType(),q.getDifficulty(),q.getMarks(),q.getNegativeMarks(),q.getDisplayOrder(),q.getOptions()==null?List.of():q.getOptions().stream().sorted(Comparator.comparing(Option::getDisplayOrder)).map(o->new QuestionDtos.PublicOption(o.getId(),o.getOptionText(),o.getDisplayOrder())).toList(),q.getStarterCode(),langs(q));}
+ public QuestionDtos.AdminQuestion admin(Question q){return new QuestionDtos.AdminQuestion(q.getId(),q.getQuestionText(),q.getType(),q.getDifficulty(),q.getMarks(),q.getNegativeMarks(),q.getExplanation(),q.getDisplayOrder(),q.getOptions()==null?List.of():q.getOptions().stream().sorted(Comparator.comparing(Option::getDisplayOrder)).map(o->new QuestionDtos.AdminOption(o.getId(),o.getOptionText(),o.isCorrect(),o.getDisplayOrder())).toList(),q.getStarterCode(),langs(q),q.getTestCasesJson());}
+}

@@ -1,0 +1,16 @@
+import api,{unwrap} from './client'
+export const dashboard=async()=>unwrap(await api.get('/admin/dashboard'))
+export const students=async(params={})=>unwrap(await api.get('/admin/students',{params}))
+export const student=async(id)=>unwrap(await api.get(`/admin/students/${id}`))
+export const assessments=async()=>unwrap(await api.get('/admin/assessments'))
+export const assessment=async(id)=>unwrap(await api.get(`/admin/assessments/${id}`))
+export const createAssessment=async(payload)=>unwrap(await api.post('/admin/assessments',payload))
+export const updateAssessment=async(id,payload)=>unwrap(await api.put(`/admin/assessments/${id}`,payload))
+export const deleteAssessment=async(id)=>unwrap(await api.delete(`/admin/assessments/${id}`))
+export const questions=async(aid)=>{try{return unwrap(await api.get(`/admin/assessments/${aid}/questions`))}catch(e){if(e?.response?.status===404)return unwrap(await api.get('/admin/questions',{params:{assessmentId:aid}}));throw e}}
+export const createQuestion=async(aid,payload)=>unwrap(await api.post(`/admin/assessments/${aid}/questions`,payload))
+export const updateQuestion=async(id,payload)=>unwrap(await api.put(`/admin/questions/${id}`,payload))
+export const deleteQuestion=async(id)=>unwrap(await api.delete(`/admin/questions/${id}`))
+export const results=async(params={})=>unwrap(await api.get('/admin/results',{params}))
+export const result=async(id)=>unwrap(await api.get(`/admin/results/${id}`))
+export const leaderboard=async(id)=>unwrap(await api.get(`/assessments/${id}/leaderboard`))

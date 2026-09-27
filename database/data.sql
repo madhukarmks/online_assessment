@@ -1,0 +1,3 @@
+-- Sample data is intentionally created by the Spring Boot DataInitializer.
+-- Start the backend with the dev profile or set SEED_SAMPLE_DATA=true.
+-- This avoids storing a password or application-managed relationship data in SQL.

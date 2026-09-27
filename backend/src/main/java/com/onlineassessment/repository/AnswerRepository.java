@@ -1,0 +1,1 @@
+package com.onlineassessment.repository; import com.onlineassessment.entity.*; import org.springframework.data.jpa.repository.*; import java.util.*; public interface AnswerRepository extends JpaRepository<Answer,Long>{Optional<Answer> findByAttemptIdAndQuestionId(Long a,Long q); List<Answer> findByAttemptId(Long a); long countByQuestionId(Long questionId);}
